@@ -2,20 +2,36 @@ import { useState, useEffect } from "react";
 
 export default function Home() {
   const [data, setData] = useState(null)
-  const [isLoading, setLoading] = useState(false)
+  const [isLoading, setLoading] = useState(true)
+  
+
 
   useEffect(() => {
     setLoading(true)
+
+    const fetchJsonData = async () => {
+      const dataUrl = "https://jsonplaceholder.typicode.com/posts";
+      try {
+        const response = await fetch(dataUrl);
+        const json = await response.json();
+        setData(json)
+        setLoading(false);
+      } catch (error) {
+        console.log('error', error);
+      }
+    }
+    fetchJsonData()
+
   }, [])
 
   if (isLoading) return <p className="text-gray-700 text-base">Fetching Posts...</p>
-  if (!data) return <p>No POSTS fetched</p>
+  if (!isLoading && !data) return <p>No POSTS fetched</p>
 
   return (
     <div>
       <h1 className="font-bold text-2xl m-2">POSTS</h1>
       {data.map(post =>
-        <div className="m-2 rounded overflow-hidden shadow-lg">
+        <div key={post.id} className="m-2 rounded overflow-hidden shadow-lg">
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">{post.title}</div>
             <p className="text-gray-700 text-base"> {post.body} </p>
