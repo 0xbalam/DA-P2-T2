@@ -52,6 +52,7 @@ class Posts extends React.Component {
 
     const newPosts = this.state.data.concat(post);
     this.setState({ data: newPosts });
+    // TOdo need to clear box or report success
   }
 
   addPost() {
