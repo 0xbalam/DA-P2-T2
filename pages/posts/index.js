@@ -10,9 +10,9 @@ export default function Home() {
     setLoading(true)
 
     const fetchJsonData = async () => {
-      const dataUrl = "https://jsonplaceholder.typicode.com/posts";
+      const url = "https://jsonplaceholder.typicode.com/posts";
       try {
-        const response = await fetch(dataUrl);
+        const response = await fetch(ulr);
         const json = await response.json();
         setData(json)
         setLoading(false);
