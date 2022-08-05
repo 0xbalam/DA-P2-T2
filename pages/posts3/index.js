@@ -52,9 +52,6 @@ class Posts extends React.Component {
 
     const newPosts = this.state.data.concat(post);
     this.setState({ data: newPosts });
-
-    event.target.elements.title.value = ''
-    event.target.elements.body.value = ''
   }
 
   addPost() {
